@@ -26,7 +26,7 @@ def transform_data():
     hadoop_conf.set("fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
     hadoop_conf.set("fs.s3a.connection.ssl.enabled", "false")
     
-    # --- KILLING ALL SUFFIX BUGS (60s, 24h, 30m) ---
+    # KILLING ALL SUFFIX BUGS (60s, 24h, 30m)
     # We replace time strings with pure Long values (seconds or milliseconds)
     hadoop_conf.set("fs.s3a.connection.timeout", "60000")
     hadoop_conf.set("fs.s3a.connection.establish.timeout", "60000")

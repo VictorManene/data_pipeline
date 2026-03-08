@@ -3,7 +3,7 @@ from pyspark.sql import SparkSession
 from pyspark import SparkConf
 
 def create_spark_session():
-    # Fix for WSL networking / NullPointerException
+    # Fix for WSL networking
     os.environ['SPARK_LOCAL_IP'] = "127.0.0.1"
 
     conf = SparkConf() \
@@ -41,8 +41,8 @@ def main():
         jdbc_url = "jdbc:postgresql://localhost:5432/warehouse" 
 
         properties = {
-            "user": "admin",           # <--- Change this
-            "password": "password123", # <--- Change this
+            "user": "admin",           
+            "password": "password123", 
             "driver": "org.postgresql.Driver"
         }
         
@@ -50,7 +50,7 @@ def main():
         print("Pipeline Complete.")
 
     except Exception as e:
-        print(f"\n--- ERROR --- \n{e}")
+        print(f"\n ERROR \n{e}")
             
     finally:
         spark.stop()
