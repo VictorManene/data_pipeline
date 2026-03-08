@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: password123
+    command: server /data --console-address ":9001"
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: warehouse
+    ports:
+      - "5432:5432"
+
+  spark-master:
+    image: apache/spark:3.5.0
+    environment:
+      - SPARK_MODE=master
+    ports:
+      - "8080:8080"
+      - "7077:7077"
+
+  superset:
+    image: apache/superset
+    ports:
+      - "8088:8088"
+    environment:
+      - SUPERSET_SECRET_KEY=something_secret
+    user: root
+    entrypoint: >
+      /bin/sh -c "
+      superset db upgrade;
+      superset fab create-admin --username admin --firstname Superset --lastname Admin --email admin@fab.org --password admin;
+      superset init;
+      /usr/bin/run-server.sh --name 'superset' --bind '0.0.0.0:8088'"

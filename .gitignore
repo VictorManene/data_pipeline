@@ -1,0 +1,12 @@
+# Docker data (very heavy, don't push!)
+pg_data/
+minio_data/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# OS files
+.DS_Store
+Thumps.db
