@@ -1,4 +1,4 @@
-# Docker data (very heavy, don't push!)
+# Docker data 
 pg_data/
 minio_data/
 
